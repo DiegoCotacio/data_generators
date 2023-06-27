@@ -33,4 +33,5 @@ jobs:
           prefect config set PREFECT_API_KEY=${{secrets.PREFECT_API_KEY}} 
           prefect cloud workspace set --workspace "${{secrets.PREFECT_WORKSPACE}}"
       - name: Run the flow
-        run: python flows/${{ github.event.inputs.flow }}
+        run: python bigquery_synt_data.py
+        #run: python flows/${{ github.event.inputs.flow }}
