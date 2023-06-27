@@ -27,4 +27,4 @@ jobs:
         prefect cloud workspace set --workspace "${{secrets.PREFECT_WORKSPACE}}"
 
     - name: Run Churn Data Generation
-      run: python main.py
+      run: python bigquery_synt_data.py
