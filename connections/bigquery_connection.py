@@ -6,7 +6,7 @@ import os
 def connect_to_bigquery():
 
     # Load BigQuery credentials from the secret
-    credentials_json = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+    credentials_json = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
 
     # Load BigQuery credentials from the service_account.json file
     credentials = service_account.Credentials.from_service_account_info(credentials_json)
