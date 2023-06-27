@@ -24,9 +24,13 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Python dependencies
+      - name: Install dependencies
         run: |
-          pip install -U prefect==${{ github.event.inputs.prefect-version }}
+          pip install -r requirements.txt
+ 
+      #- name: Python dependencies
+       # run: |
+        #  pip install -U prefect==${{ github.event.inputs.prefect-version }}
 
       - name: Prefect Cloud login
         run: |
