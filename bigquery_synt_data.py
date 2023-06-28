@@ -8,6 +8,7 @@ import psycopg2
 from connections.bigquery_connection import connect_to_bigquery
 from google.cloud import bigquery
 from google.api_core import retry
+import datetime
 
 #Funcion de generacion de datos sinteticos
 @task
@@ -63,7 +64,9 @@ def generate_dataframe():
         max_val = info['max']
         data[variable] = np.random.normal(loc=mean_val, scale=(max_val - min_val) / 6, size=num_rows)
         data[variable] = np.clip(data[variable], min_val, max_val)
-
+    
+    current_date = datetime.date.today()
+    data['fecha_ingreso'] = current_date
 
     df = pd.DataFrame(data)
     df['clienteidentifier'] = df['clienteidentifier'].astype(str)
@@ -86,6 +89,7 @@ def generate_dataframe():
     df['monthlycharges'] = df['monthlycharges'].astype(float)
     df['totalcharges'] = df['totalcharges'].astype(float)
     df['tenure'] = df['tenure'].astype(float)
+    df['fecha_ingreso'] = pd.to_datetime(df['fecha_ingreso']).dt.date
     
 
     return df
